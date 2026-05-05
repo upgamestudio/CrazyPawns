@@ -1,4 +1,5 @@
 ﻿using Code.Gameplay.Cameras.Provider;
+using Code.Gameplay.Feature.RaycastDetector.Behaviour;
 using Code.Gameplay.Input.Services;
 using UnityEngine;
 
@@ -6,12 +7,13 @@ namespace Code.Gameplay.Feature.RaycastDetector.Service
 {
     public class RaycastDetectorService
     {
-        public GameObject DetectObject { get; private set; }
+        private readonly LayerMask layersToCheck = ~0;
         
         private readonly CameraProvider cameraProvider;
         private readonly InputService inputService;
-
-        private LayerMask layersToCheck = ~0;
+        
+        public DetectObject Target { get; private set; }
+        public RaycastHit Hit { get; private set; }
 
         public RaycastDetectorService(CameraProvider cameraProvider, InputService inputService)
         {
@@ -25,13 +27,17 @@ namespace Code.Gameplay.Feature.RaycastDetector.Service
 
             if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, layersToCheck))
             {
-                DetectObject = hit.collider.gameObject;
+                if(hit.collider.gameObject.TryGetComponent<DetectObject>(out var target))
+                {
+                    Target = target;
+                    Hit = hit;
+                }
             }
             else
             {
-                if (DetectObject)
+                if (Target)
                 {
-                    DetectObject = null;
+                    Target = null;
                 }
             }
         }

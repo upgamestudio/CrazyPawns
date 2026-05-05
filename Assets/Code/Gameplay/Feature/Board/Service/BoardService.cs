@@ -55,5 +55,24 @@ namespace Code.Gameplay.Feature.Board.Service
 
             return result;
         }
+
+        public Vector3 ClosestCellToPoint(Vector3 point)
+        {
+            var resultPosition = new Vector3(float.MaxValue, float.MaxValue, float.MaxValue);
+            var minDistance = float.MaxValue;
+
+            foreach (var cell in board)
+            {
+                var distance = Vector3.Distance(cell.Position, point);
+                
+                if (distance < minDistance)
+                {
+                    resultPosition = cell.Position;
+                    minDistance = distance;
+                }
+            }
+
+            return resultPosition;
+        }
     }
 }

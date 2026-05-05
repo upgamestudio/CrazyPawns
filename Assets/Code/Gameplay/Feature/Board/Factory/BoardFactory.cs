@@ -24,7 +24,7 @@ namespace Code.Gameplay.Feature.Board.Factory
                     var cell = GameObject.Instantiate(staticDataProvider.GetCellTemplate());
 
                     cell.Setup(CalculatePosition(size, x, y, cell.Size), GetColor(white, black, (x + y) % 2 == 0));
-                    cells[x + y] = cell;
+                    cells[x * size + y] = cell;
                 }
             }
 

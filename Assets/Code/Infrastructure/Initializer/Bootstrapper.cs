@@ -1,9 +1,9 @@
-using System;
 using Code.Gameplay.Cameras.Provider;
 using Code.Gameplay.Feature.Board.Factory;
 using Code.Gameplay.Feature.Board.Service;
 using Code.Gameplay.Feature.ChessPiece.Factory;
 using Code.Gameplay.Feature.ChessPiece.Service;
+using Code.Gameplay.Feature.Dragging.Service;
 using Code.Gameplay.Feature.RaycastDetector.Service;
 using Code.Gameplay.Input.Services;
 using Code.Infrastructure.Loaders.StaticData;
@@ -17,6 +17,7 @@ namespace CrazyPawn.Infrastructure.Initializer
         [SerializeField] private Camera mainCamera;
 
         private RaycastDetectorService raycastDetectorService;
+        private DraggingService draggingService;
         
         private void Awake()
         {
@@ -34,11 +35,13 @@ namespace CrazyPawn.Infrastructure.Initializer
             chessPieceService.CircleGeneration(settings.InitialZoneRadius, settings.InitialPawnCount);
 
             raycastDetectorService = new RaycastDetectorService(cameraProvider, inputService);
+            draggingService = new DraggingService(raycastDetectorService, cameraProvider, inputService, boardService);
         }
 
         private void Update()
         {
             raycastDetectorService.Tick();
+            draggingService.Tick();
         }
     }
 }
