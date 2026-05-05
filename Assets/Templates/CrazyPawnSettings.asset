@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b6a482b945a44ed2b80d93937ce97d7, type: 3}
   m_Name: CrazyPawnSettings
   m_EditorClassIdentifier: 
-  InitialZoneRadius: 2
-  InitialPawnCount: 2
+  InitialZoneRadius: 1.5
+  InitialPawnCount: 5
   DeleteMaterial: {fileID: 2100000, guid: 854bcfe2fa381404e981b4cafde1e4df, type: 2}
   ActiveConnectorMaterial: {fileID: 2100000, guid: 27c0a93bfcbcf4070978f6b70d2766ce,
     type: 2}
