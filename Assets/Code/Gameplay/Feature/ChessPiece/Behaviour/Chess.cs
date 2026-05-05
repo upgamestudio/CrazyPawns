@@ -6,11 +6,14 @@ namespace Code.Gameplay.Feature.ChessPiece.Behaviour
 {
     public class Chess : MonoBehaviour
     {
+        public event Action<Chess> OnRemoved;
+        
         [SerializeField] private DraggingTarget draggingTarget;
 
         private void Awake()
         {
-            draggingTarget.OnGragging += Move;
+            draggingTarget.OnDragging += Move;
+            draggingTarget.OnRemoved += Remove;
         }
 
         public void Setup(Vector3 at)
@@ -25,7 +28,13 @@ namespace Code.Gameplay.Feature.ChessPiece.Behaviour
 
         private void OnDestroy()
         {
-            draggingTarget.OnGragging -= Move;
+            draggingTarget.OnDragging -= Move;
+            draggingTarget.OnRemoved -= Remove;
+        }
+
+        private void Remove()
+        {
+            OnRemoved?.Invoke(this);
         }
     }
 }

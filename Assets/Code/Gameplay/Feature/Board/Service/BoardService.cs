@@ -12,6 +12,7 @@ namespace Code.Gameplay.Feature.Board.Service
         
         private Cell[] board;
         private int boardSize;
+        private float boardScale;
 
         public BoardService(BoardFactory boardFactory)
         {
@@ -21,7 +22,8 @@ namespace Code.Gameplay.Feature.Board.Service
         public void Create(int size, Color white, Color black)
         {
             board = boardFactory.Create(size, white, black);
-            boardSize = board.Length / 2;
+            boardSize = size;
+            boardScale = boardSize * board.First().Size;
         }
 
         public List<Vector3> GetCellInCircle(float radius)
@@ -74,5 +76,11 @@ namespace Code.Gameplay.Feature.Board.Service
 
             return resultPosition;
         }
+        
+        public bool IsOnBoard(Vector3 position) =>
+            position.x >= -(boardScale * 0.5f) && 
+            position.x <=  boardScale * 0.5f && 
+            position.z >= -(boardScale * 0.5f) && 
+            position.z <=  boardScale * 0.5f;
     }
 }

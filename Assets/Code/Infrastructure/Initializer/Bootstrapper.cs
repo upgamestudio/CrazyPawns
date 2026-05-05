@@ -17,7 +17,7 @@ namespace CrazyPawn.Infrastructure.Initializer
         [SerializeField] private Camera mainCamera;
 
         private RaycastDetectorService raycastDetectorService;
-        private DraggingService draggingService;
+        private OnBoardDraggingService onBoardDraggingService;
         
         private void Awake()
         {
@@ -33,15 +33,15 @@ namespace CrazyPawn.Infrastructure.Initializer
 
             var chessPieceService = new ChessPieceService(boardService, new ChessFactory(staticDataProvider));
             chessPieceService.CircleGeneration(settings.InitialZoneRadius, settings.InitialPawnCount);
-
+            
             raycastDetectorService = new RaycastDetectorService(cameraProvider, inputService);
-            draggingService = new DraggingService(raycastDetectorService, cameraProvider, inputService, boardService);
+            onBoardDraggingService = new OnBoardDraggingService(raycastDetectorService, cameraProvider, inputService, boardService);
         }
 
         private void Update()
         {
             raycastDetectorService.Tick();
-            draggingService.Tick();
+            onBoardDraggingService.Tick();
         }
     }
 }

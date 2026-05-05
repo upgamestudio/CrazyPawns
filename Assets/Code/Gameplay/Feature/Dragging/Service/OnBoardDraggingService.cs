@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Code.Gameplay.Cameras.Provider;
+﻿using Code.Gameplay.Cameras.Provider;
 using Code.Gameplay.Feature.Board.Service;
 using Code.Gameplay.Feature.Dragging.Behaviour;
 using Code.Gameplay.Feature.RaycastDetector.Service;
@@ -8,7 +7,7 @@ using UnityEngine;
 
 namespace Code.Gameplay.Feature.Dragging.Service
 {
-    public class DraggingService
+    public class OnBoardDraggingService
     {
         private readonly RaycastDetectorService raycastDetector;
         private readonly CameraProvider cameraProvider;
@@ -18,7 +17,7 @@ namespace Code.Gameplay.Feature.Dragging.Service
         private DraggingTarget target;
         private Vector3 offset;
 
-        public DraggingService(
+        public OnBoardDraggingService(
             RaycastDetectorService raycastDetector,
             CameraProvider cameraProvider,
             InputService inputService,
@@ -55,15 +54,22 @@ namespace Code.Gameplay.Feature.Dragging.Service
 
         private void PositionAdjustment()
         {
-            var position = boardService
-                .ClosestCellToPoint(target.Position);
+            if (boardService.IsOnBoard(target.Position))
+            {
+                var position = boardService
+                    .ClosestCellToPoint(target.Position);
             
-            target.UpdatePosition(position);
+                target.UpdatePosition(position);
+            }
+            else
+            {
+                target.Remove();
+            }
         }
 
         private void UpdateDraggedPosition()
         {
-            Ray ray = cameraProvider.MainCamera.ScreenPointToRay(inputService.MousePosition);
+            var ray = cameraProvider.MainCamera.ScreenPointToRay(inputService.MousePosition);
             
             if (new Plane(Vector3.up, Vector3.zero).Raycast(ray, out var enter))
             {
