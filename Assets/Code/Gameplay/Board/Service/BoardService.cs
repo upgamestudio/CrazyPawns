@@ -39,10 +39,10 @@ namespace Code.Gameplay.Board.Service
 
             for (var x = 0; x < boardSize; x++)
             {
-                for (var z = 0; z < boardSize; z++)
+                for (var y = 0; y < boardSize; y++)
                 {
                     var posX = start + x * cellSize;
-                    var posZ = start + z * cellSize;
+                    var posZ = start + y * cellSize;
 
                     var distanceSqr = posX * posX + posZ * posZ;
 
