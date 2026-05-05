@@ -1,7 +1,7 @@
 ﻿using Code.Common.Extensions;
 using UnityEngine;
 
-namespace Code.Gameplay.Board.Behaviour
+namespace Code.Gameplay.Feature.Board.Behaviour
 {
     public class Cell : MonoBehaviour
     {

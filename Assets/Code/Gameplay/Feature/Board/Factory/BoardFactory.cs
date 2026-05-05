@@ -1,8 +1,8 @@
-﻿using Code.Gameplay.Board.Behaviour;
+﻿using Code.Gameplay.Feature.Board.Behaviour;
 using Code.Infrastructure.Loaders.StaticData;
 using UnityEngine;
 
-namespace Code.Gameplay.Board.Factory
+namespace Code.Gameplay.Feature.Board.Factory
 {
     public class BoardFactory
     {

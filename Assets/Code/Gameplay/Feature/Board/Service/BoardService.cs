@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Code.Gameplay.Board.Behaviour;
-using Code.Gameplay.Board.Factory;
+using Code.Gameplay.Feature.Board.Behaviour;
+using Code.Gameplay.Feature.Board.Factory;
 using UnityEngine;
 
-namespace Code.Gameplay.Board.Service
+namespace Code.Gameplay.Feature.Board.Service
 {
     public class BoardService
     {

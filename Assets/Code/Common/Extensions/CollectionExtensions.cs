@@ -6,7 +6,7 @@ namespace Code.Common.Extensions
     {
         private static readonly System.Random random = new System.Random();
         
-        public static void Shuffle<T>(this List<T> list)
+        public static List<T> Shuffle<T>(this List<T> list)
         {
             var n = list.Count;
         
@@ -16,6 +16,8 @@ namespace Code.Common.Extensions
                 var k = random.Next(n + 1);
                 (list[k], list[n]) = (list[n], list[k]);
             }
+
+            return list;
         }
     }
 }

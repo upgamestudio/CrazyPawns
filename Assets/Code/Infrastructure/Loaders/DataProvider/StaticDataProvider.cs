@@ -1,5 +1,5 @@
-﻿using Code.Gameplay.Board.Behaviour;
-using Code.Gameplay.ChessPiece.Behaviour;
+﻿using Code.Gameplay.Feature.Board.Behaviour;
+using Code.Gameplay.Feature.ChessPiece.Behaviour;
 using UnityEngine;
 
 namespace Code.Infrastructure.Loaders.StaticData

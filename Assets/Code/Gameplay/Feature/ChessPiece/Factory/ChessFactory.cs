@@ -1,8 +1,8 @@
-﻿using Code.Gameplay.ChessPiece.Behaviour;
+﻿using Code.Gameplay.Feature.ChessPiece.Behaviour;
 using Code.Infrastructure.Loaders.StaticData;
 using UnityEngine;
 
-namespace Code.Gameplay.ChessPiece.Factory
+namespace Code.Gameplay.Feature.ChessPiece.Factory
 {
     public class ChessFactory
     {

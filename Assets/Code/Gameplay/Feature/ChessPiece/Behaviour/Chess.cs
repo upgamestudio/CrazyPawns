@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Code.Gameplay.ChessPiece.Behaviour
+namespace Code.Gameplay.Feature.ChessPiece.Behaviour
 {
     public class Chess : MonoBehaviour
     {
