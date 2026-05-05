@@ -14,7 +14,7 @@ namespace Code.Gameplay.Feature.Dragging.Service
         private readonly InputService inputService;
         private readonly BoardService boardService;
 
-        private DraggingTarget target;
+        private BoardDraggingTarget target;
         private Vector3 offset;
 
         public OnBoardDraggingService(
@@ -33,7 +33,7 @@ namespace Code.Gameplay.Feature.Dragging.Service
         {
             if (!target && inputService.GetMouseButtonDown() && raycastDetector.Target)
             {
-                if (raycastDetector.Target.TryGetComponent<DraggingTarget>(out var draggingTarget))
+                if (raycastDetector.Target.TryGetComponent<BoardDraggingTarget>(out var draggingTarget))
                 {
                     target = draggingTarget;
                     offset = target.Position - GetGroundHitPoint(raycastDetector.Hit.point);

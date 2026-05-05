@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1943715399338178067}
   - component: {fileID: 3840827511942012006}
   - component: {fileID: 159942774137510722}
+  - component: {fileID: 808342819191584572}
   m_Layer: 0
   m_Name: SphereSocket 01
   m_TagString: Untagged
@@ -131,6 +132,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a01e2ea7f55543fdb15f5316b9c74075, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &808342819191584572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1822488028157087553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6c22a4240024782935351d950e41bf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderer: {fileID: 3822121263811634697}
 --- !u!1 &4336407271673045507
 GameObject:
   m_ObjectHideFlags: 0
@@ -193,13 +207,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79c6dd3876c9432e9a869a2c8103c412, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  draggingTarget: {fileID: 1832095833537468827}
+  boardDraggingTarget: {fileID: 1832095833537468827}
   renderers:
   - {fileID: 8039290623323058629}
   - {fileID: 5589964279256305542}
   - {fileID: 5554702584534788149}
   - {fileID: 2667045952127566873}
   - {fileID: 3822121263811634697}
+  <Connectors>k__BackingField:
+  - {fileID: 2461902513000222705}
+  - {fileID: 36338120248039689}
+  - {fileID: 2058685828425848126}
+  - {fileID: 808342819191584572}
 --- !u!1 &6572458348302323540
 GameObject:
   m_ObjectHideFlags: 0
@@ -346,6 +365,7 @@ GameObject:
   - component: {fileID: 1211455031588432381}
   - component: {fileID: 6685997259256018743}
   - component: {fileID: 1720162338362394706}
+  - component: {fileID: 2058685828425848126}
   m_Layer: 0
   m_Name: SphereSocket 02
   m_TagString: Untagged
@@ -463,6 +483,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a01e2ea7f55543fdb15f5316b9c74075, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2058685828425848126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6976845434568547336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6c22a4240024782935351d950e41bf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderer: {fileID: 2667045952127566873}
 --- !u!1 &7758970563510421918
 GameObject:
   m_ObjectHideFlags: 0
@@ -477,6 +510,7 @@ GameObject:
   - component: {fileID: 430658776270710120}
   - component: {fileID: 1573665014748631932}
   - component: {fileID: 1524894312353616803}
+  - component: {fileID: 2461902513000222705}
   m_Layer: 0
   m_Name: SphereSocket 04
   m_TagString: Untagged
@@ -594,6 +628,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a01e2ea7f55543fdb15f5316b9c74075, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2461902513000222705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7758970563510421918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6c22a4240024782935351d950e41bf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderer: {fileID: 5589964279256305542}
 --- !u!1 &8974895304155393534
 GameObject:
   m_ObjectHideFlags: 0
@@ -608,6 +655,7 @@ GameObject:
   - component: {fileID: 8464554459641446980}
   - component: {fileID: 594588265260032354}
   - component: {fileID: 3259346542941493703}
+  - component: {fileID: 36338120248039689}
   m_Layer: 0
   m_Name: SphereSocket 03
   m_TagString: Untagged
@@ -725,3 +773,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a01e2ea7f55543fdb15f5316b9c74075, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &36338120248039689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8974895304155393534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6c22a4240024782935351d950e41bf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderer: {fileID: 5554702584534788149}

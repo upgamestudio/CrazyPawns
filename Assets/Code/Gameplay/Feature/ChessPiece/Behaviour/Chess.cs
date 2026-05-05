@@ -1,5 +1,5 @@
 ﻿using System;
-using Code.Common.Extensions;
+using Code.Gameplay.Feature.Connector.Behaviour;
 using Code.Gameplay.Feature.Dragging.Behaviour;
 using UnityEngine;
 
@@ -9,18 +9,20 @@ namespace Code.Gameplay.Feature.ChessPiece.Behaviour
     {
         public event Action<Chess> OnRemoved;
         
-        [SerializeField] private DraggingTarget draggingTarget;
+        [SerializeField] private BoardDraggingTarget boardDraggingTarget;
         [SerializeField] private Renderer[] renderers;
         
         private Material baseMaterial;
         private Material deleteMaterial;
+        
+        [field: SerializeField] public ConnectorView[] Connectors { get; private set; }
 
         private void Awake()
         {
-            draggingTarget.OnDragging += Move;
-            draggingTarget.OnBoard += BoardVisualization;
-            draggingTarget.OnBehindBoard += BehindBoardVisualization;
-            draggingTarget.OnRemoved += Remove;
+            boardDraggingTarget.OnDragging += Move;
+            boardDraggingTarget.OnBoard += BoardVisualization;
+            boardDraggingTarget.OnBehindBoard += BehindBoardVisualization;
+            boardDraggingTarget.OnRemoved += Remove;
         }
 
         public void Setup(Vector3 at, Material baseMaterial, Material deleteMaterial)
@@ -53,8 +55,8 @@ namespace Code.Gameplay.Feature.ChessPiece.Behaviour
 
         private void OnDestroy()
         {
-            draggingTarget.OnDragging -= Move;
-            draggingTarget.OnRemoved -= Remove;
+            boardDraggingTarget.OnDragging -= Move;
+            boardDraggingTarget.OnRemoved -= Remove;
         }
 
         private void Remove()

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Code.Gameplay.Feature.Dragging.Behaviour
 {
-    public class DraggingTarget : MonoBehaviour
+    public class BoardDraggingTarget : MonoBehaviour
     {
         public event Action<Vector3> OnDragging;
         public event Action OnRemoved;

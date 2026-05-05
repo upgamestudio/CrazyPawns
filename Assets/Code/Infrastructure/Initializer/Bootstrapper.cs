@@ -3,6 +3,9 @@ using Code.Gameplay.Feature.Board.Factory;
 using Code.Gameplay.Feature.Board.Service;
 using Code.Gameplay.Feature.ChessPiece.Factory;
 using Code.Gameplay.Feature.ChessPiece.Service;
+using Code.Gameplay.Feature.Connect.Factory;
+using Code.Gameplay.Feature.Connect.Service;
+using Code.Gameplay.Feature.Connector.Service;
 using Code.Gameplay.Feature.Dragging.Service;
 using Code.Gameplay.Feature.RaycastDetector.Service;
 using Code.Gameplay.Input.Services;
@@ -18,6 +21,7 @@ namespace CrazyPawn.Infrastructure.Initializer
 
         private RaycastDetectorService raycastDetectorService;
         private OnBoardDraggingService onBoardDraggingService;
+        private ChoiceConnectionService choiceConnectionService;
         
         private void Awake()
         {
@@ -25,28 +29,31 @@ namespace CrazyPawn.Infrastructure.Initializer
             var cameraProvider = new CameraProvider();
             var inputService = new InputService();
             
+            var boardService = new BoardService(new BoardFactory(staticDataProvider));
+            var connectorService = new ConnectorService();
+            var chessPieceService = new ChessPieceService(boardService, new ChessFactory(staticDataProvider), connectorService);
+            
+            raycastDetectorService = new RaycastDetectorService(cameraProvider, inputService);
+            onBoardDraggingService = new OnBoardDraggingService(raycastDetectorService, cameraProvider, inputService, boardService);
+            choiceConnectionService = new ChoiceConnectionService(inputService, raycastDetectorService,
+                new ConnectFactory(staticDataProvider), connectorService);
+
             staticDataProvider.Initialize();
             cameraProvider.SetMainCamera(mainCamera);
-            
-            var boardService = new BoardService(new BoardFactory(staticDataProvider));
             boardService.Create(settings.CheckerboardSize, settings.WhiteCellColor, settings.BlackCellColor);
-
-            var chessPieceService = new ChessPieceService(boardService, new ChessFactory(staticDataProvider));
-            
             chessPieceService.CircleGeneration(
                 settings.InitialZoneRadius,
                 settings.InitialPawnCount,
                 settings.BaseMaterial,
-                settings.DeleteMaterial);
-            
-            raycastDetectorService = new RaycastDetectorService(cameraProvider, inputService);
-            onBoardDraggingService = new OnBoardDraggingService(raycastDetectorService, cameraProvider, inputService, boardService);
+                settings.DeleteMaterial,
+                settings.ActiveConnectorMaterial);
         }
 
         private void Update()
         {
             raycastDetectorService.Tick();
             onBoardDraggingService.Tick();
+            choiceConnectionService.Tick();
         }
     }
 }
