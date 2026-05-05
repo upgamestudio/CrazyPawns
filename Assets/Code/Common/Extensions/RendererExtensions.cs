@@ -4,12 +4,14 @@ namespace Code.Common.Extensions
 {
     public static class RendererExtensions
     {
-        public static Renderer SetColor(this Renderer renderer, string propertyName, Color color)
+        private const string ColorPropertyName = "_BaseColor";
+
+        public static Renderer SetColor(this Renderer renderer, Color color)
         {
             var propertyBlock = new MaterialPropertyBlock();
             
             renderer.GetPropertyBlock(propertyBlock);
-            propertyBlock.SetColor(propertyName, color);
+            propertyBlock.SetColor(ColorPropertyName, color);
             renderer.SetPropertyBlock(propertyBlock);
             
             return renderer;

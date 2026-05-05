@@ -1,4 +1,4 @@
-﻿using Code.Gameplay.Cell.Behaviour;
+﻿using Code.Gameplay.Board.Behaviour;
 using UnityEngine;
 
 namespace Code.Infrastructure.Loaders.StaticData
@@ -7,17 +7,17 @@ namespace Code.Infrastructure.Loaders.StaticData
     {
         private const string BoardCellPath = "Gameplay/BoardCell/Cell";
         
-        private CellView cellTemplate;
+        private Cell cellTemplate;
 
         public void Initialize()
         {
             LoadCellTemplate();
         }
 
-        public CellView GetCellTemplate() => cellTemplate;
+        public Cell GetCellTemplate() => cellTemplate;
 
         private void LoadCellTemplate() =>
             cellTemplate = Resources
-                .Load<CellView>(BoardCellPath);
+                .Load<Cell>(BoardCellPath);
     }
 }
