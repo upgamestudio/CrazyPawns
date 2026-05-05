@@ -1,5 +1,7 @@
 using Code.Gameplay.Board.Factory;
 using Code.Gameplay.Board.Service;
+using Code.Gameplay.ChessPiece.Factory;
+using Code.Gameplay.ChessPiece.Service;
 using Code.Infrastructure.Loaders.StaticData;
 using UnityEngine;
 
@@ -16,8 +18,10 @@ namespace CrazyPawn.Infrastructure.Initializer
             staticDataProvider.Initialize();
             
             var boardService = new BoardService(new BoardFactory(staticDataProvider));
-
             boardService.Create(settings.CheckerboardSize, settings.WhiteCellColor, settings.BlackCellColor);
+
+            var chessPieceService = new ChessPieceService(boardService, new ChessFactory(staticDataProvider));
+            chessPieceService.CircleGeneration(settings.InitialZoneRadius, settings.InitialPawnCount);
         }
     }
 }

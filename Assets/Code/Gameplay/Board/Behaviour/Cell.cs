@@ -7,6 +7,7 @@ namespace Code.Gameplay.Board.Behaviour
     {
         [SerializeField] private Renderer renderer;
 
+        public Vector3 Position => transform.position;
         public float Size => transform.localScale.x;
         
         public void Setup(Vector3 at, Color color)
