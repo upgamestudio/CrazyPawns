@@ -194,6 +194,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   draggingTarget: {fileID: 1832095833537468827}
+  renderers:
+  - {fileID: 8039290623323058629}
+  - {fileID: 5589964279256305542}
+  - {fileID: 5554702584534788149}
+  - {fileID: 2667045952127566873}
+  - {fileID: 3822121263811634697}
 --- !u!1 &6572458348302323540
 GameObject:
   m_ObjectHideFlags: 0

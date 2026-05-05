@@ -8,6 +8,7 @@ namespace CrazyPawn
         [SerializeField] public float InitialZoneRadius = 10f;
         [SerializeField] public int InitialPawnCount = 7;
 
+        [SerializeField] public Material BaseMaterial;
         [SerializeField] public Material DeleteMaterial;
         [SerializeField] public Material ActiveConnectorMaterial;
 

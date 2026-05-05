@@ -81,6 +81,7 @@ namespace Code.Gameplay.Feature.Dragging.Service
                 {
                     var draggingPosition = groundPoint + offset;
                     target.UpdatePosition(draggingPosition);
+                    target.IsOnBoard(boardService.IsOnBoard(draggingPosition));
                 }
             }
         }

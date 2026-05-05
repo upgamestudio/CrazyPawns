@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InitialZoneRadius: 1.5
   InitialPawnCount: 5
+  BaseMaterial: {fileID: 2100000, guid: 7c43818076f5b4867ad517424bd0d68a, type: 2}
   DeleteMaterial: {fileID: 2100000, guid: 854bcfe2fa381404e981b4cafde1e4df, type: 2}
   ActiveConnectorMaterial: {fileID: 2100000, guid: 27c0a93bfcbcf4070978f6b70d2766ce,
     type: 2}

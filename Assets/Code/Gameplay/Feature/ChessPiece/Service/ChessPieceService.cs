@@ -3,7 +3,6 @@ using Code.Common.Extensions;
 using Code.Gameplay.Feature.Board.Service;
 using Code.Gameplay.Feature.ChessPiece.Behaviour;
 using Code.Gameplay.Feature.ChessPiece.Factory;
-using Code.Gameplay.Feature.Dragging.Behaviour;
 using UnityEngine;
 
 namespace Code.Gameplay.Feature.ChessPiece.Service
@@ -14,9 +13,7 @@ namespace Code.Gameplay.Feature.ChessPiece.Service
         private readonly ChessFactory chessFactory;
 
         private List<Chess> chesses;
-        public List<Chess> Chesses => chesses;
-
-
+        
         public ChessPieceService(BoardService boardService, ChessFactory chessFactory)
         {
             this.boardService = boardService;
@@ -25,7 +22,7 @@ namespace Code.Gameplay.Feature.ChessPiece.Service
             chesses = new List<Chess>();
         }
 
-        public void CircleGeneration(float radius, int count)
+        public void CircleGeneration(float radius, int count, Material baseMaterial, Material deleteMaterial)
         {
             var points = boardService
                 .GetCellInCircle(radius)
@@ -35,14 +32,14 @@ namespace Code.Gameplay.Feature.ChessPiece.Service
             
             for (var i = 0; i < count; i++)
             {
-                var chess = chessFactory.Create(points[i]);
+                var chess = chessFactory.Create(points[i], baseMaterial, deleteMaterial);
                 
                 chesses.Add(chess);
                 chess.OnRemoved += Remove;
             }
         }
 
-        public void Remove(Chess chess)
+        private void Remove(Chess chess)
         {
             chess.OnRemoved -= Remove;
             chesses.Remove(chess);

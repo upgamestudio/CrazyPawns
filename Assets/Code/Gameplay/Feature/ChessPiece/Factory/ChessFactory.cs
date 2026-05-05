@@ -13,10 +13,10 @@ namespace Code.Gameplay.Feature.ChessPiece.Factory
             this.staticDataProvider = staticDataProvider;
         }
         
-        public Chess Create(Vector3 at)
+        public Chess Create(Vector3 at, Material baseMaterial, Material deleteMaterial)
         {
             var chess = GameObject.Instantiate(staticDataProvider.GetChessTemplate());
-            chess.Setup(at);
+            chess.Setup(at, baseMaterial, deleteMaterial);
             return chess;
         }
     }

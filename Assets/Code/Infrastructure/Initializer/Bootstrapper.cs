@@ -32,7 +32,12 @@ namespace CrazyPawn.Infrastructure.Initializer
             boardService.Create(settings.CheckerboardSize, settings.WhiteCellColor, settings.BlackCellColor);
 
             var chessPieceService = new ChessPieceService(boardService, new ChessFactory(staticDataProvider));
-            chessPieceService.CircleGeneration(settings.InitialZoneRadius, settings.InitialPawnCount);
+            
+            chessPieceService.CircleGeneration(
+                settings.InitialZoneRadius,
+                settings.InitialPawnCount,
+                settings.BaseMaterial,
+                settings.DeleteMaterial);
             
             raycastDetectorService = new RaycastDetectorService(cameraProvider, inputService);
             onBoardDraggingService = new OnBoardDraggingService(raycastDetectorService, cameraProvider, inputService, boardService);
