@@ -60,6 +60,7 @@ namespace Code.Gameplay.Feature.Connector.Service
         
         public void DisableConnectionMode(List<ConnectorView> connectors)
         {
+            
             if (connectors == null)
                 return;
             

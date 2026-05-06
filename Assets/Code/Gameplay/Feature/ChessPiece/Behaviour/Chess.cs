@@ -8,7 +8,7 @@ namespace Code.Gameplay.Feature.ChessPiece.Behaviour
     public class Chess : MonoBehaviour
     {
         public event Action<Chess> OnRemoved;
-        
+
         [SerializeField] private BoardDraggingTarget boardDraggingTarget;
         [SerializeField] private Renderer[] renderers;
         
@@ -51,6 +51,11 @@ namespace Code.Gameplay.Feature.ChessPiece.Behaviour
         private void Move(Vector3 at)
         {
             transform.position = at;
+
+            foreach (var connector in Connectors)
+            {
+                connector.UpdateConnectPosition();
+            }
         }
 
         private void OnDestroy()

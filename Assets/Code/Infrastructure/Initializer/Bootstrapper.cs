@@ -1,3 +1,4 @@
+using System;
 using Code.Gameplay.Cameras.Provider;
 using Code.Gameplay.Feature.Board.Factory;
 using Code.Gameplay.Feature.Board.Service;
@@ -22,7 +23,8 @@ namespace CrazyPawn.Infrastructure.Initializer
         private RaycastDetectorService raycastDetectorService;
         private OnBoardDraggingService onBoardDraggingService;
         private ChoiceConnectionService choiceConnectionService;
-        
+        private ConnectBuildService connectBuildService;
+
         private void Awake()
         {
             var staticDataProvider = new StaticDataProvider();
@@ -37,11 +39,12 @@ namespace CrazyPawn.Infrastructure.Initializer
             onBoardDraggingService = new OnBoardDraggingService(raycastDetectorService, cameraProvider, inputService, boardService);
             choiceConnectionService = new ChoiceConnectionService(inputService, raycastDetectorService);
 
-            var connectBuildService = new ConnectBuildService(choiceConnectionService, connectorService, new ConnectFactory(staticDataProvider));
+            connectBuildService = new ConnectBuildService(choiceConnectionService, connectorService, new ConnectFactory(staticDataProvider));
 
             staticDataProvider.Initialize();
             cameraProvider.SetMainCamera(mainCamera);
             boardService.Create(settings.CheckerboardSize, settings.WhiteCellColor, settings.BlackCellColor);
+            
             chessPieceService.CircleGeneration(
                 settings.InitialZoneRadius,
                 settings.InitialPawnCount,
@@ -57,6 +60,11 @@ namespace CrazyPawn.Infrastructure.Initializer
             raycastDetectorService.Tick();
             onBoardDraggingService.Tick();
             choiceConnectionService.Tick();
+        }
+
+        private void OnDestroy()
+        {
+            connectBuildService?.Disable();
         }
     }
 }
