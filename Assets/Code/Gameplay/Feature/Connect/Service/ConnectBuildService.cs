@@ -49,7 +49,14 @@ namespace Code.Gameplay.Feature.Connect.Service
 
         private void CleanupBuilding()
         {
-            connectorService.DisableConnectionMode(avaliableConnectors);
+            if (avaliableConnectors != null)
+            {
+                connectorService.DisableConnectionMode(avaliableConnectors);
+            }
+            
+            avaliableConnectors?.Clear();
+            avaliableConnectors = null;
+            
             beginConnector = null;
         }
 

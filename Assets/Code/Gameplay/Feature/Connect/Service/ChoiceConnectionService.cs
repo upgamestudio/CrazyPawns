@@ -16,7 +16,6 @@ namespace Code.Gameplay.Feature.Connect.Service
         private readonly RaycastDetectorService raycastDetector;
 
         private ConnectorView firstConnector;
-        private List<ConnectorView> avaliableConnectors;
         
         public ChoiceConnectionService(
             InputService inputService, 
@@ -51,6 +50,7 @@ namespace Code.Gameplay.Feature.Connect.Service
             {
                 firstConnector = connector;
                 OnFirstConnectorSelected?.Invoke(firstConnector);
+                return;
             }
             
             if (inputService.GetMouseButtonUp() && firstConnector && firstConnector != connector)
