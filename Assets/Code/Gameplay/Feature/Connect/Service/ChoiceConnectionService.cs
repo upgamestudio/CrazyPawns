@@ -37,7 +37,7 @@ namespace Code.Gameplay.Feature.Connect.Service
 
             if (!raycastDetector.Target.TryGetComponent<ConnectorView>(out var connector))
             {
-                if (inputService.GetMouseButtonDown())
+                if (inputService.GetMouseButtonDown() || inputService.GetMouseButtonUp())
                 {
                     OnSelectDisabled?.Invoke();
                     firstConnector = null;
