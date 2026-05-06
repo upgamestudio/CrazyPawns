@@ -35,8 +35,9 @@ namespace CrazyPawn.Infrastructure.Initializer
             
             raycastDetectorService = new RaycastDetectorService(cameraProvider, inputService);
             onBoardDraggingService = new OnBoardDraggingService(raycastDetectorService, cameraProvider, inputService, boardService);
-            choiceConnectionService = new ChoiceConnectionService(inputService, raycastDetectorService,
-                new ConnectFactory(staticDataProvider), connectorService);
+            choiceConnectionService = new ChoiceConnectionService(inputService, raycastDetectorService);
+
+            var connectBuildService = new ConnectBuildService(choiceConnectionService, connectorService, new ConnectFactory(staticDataProvider));
 
             staticDataProvider.Initialize();
             cameraProvider.SetMainCamera(mainCamera);
@@ -47,6 +48,8 @@ namespace CrazyPawn.Infrastructure.Initializer
                 settings.BaseMaterial,
                 settings.DeleteMaterial,
                 settings.ActiveConnectorMaterial);
+            
+            connectBuildService.Initialize();
         }
 
         private void Update()

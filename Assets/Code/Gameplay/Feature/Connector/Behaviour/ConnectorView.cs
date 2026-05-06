@@ -17,7 +17,7 @@ namespace Code.Gameplay.Feature.Connector.Behaviour
             this.baseMaterial = baseMaterial;
         }
 
-        public void SelectVisual()
+        public void ActivateVisual()
         {
             renderer.material = activeMaterial;
         }

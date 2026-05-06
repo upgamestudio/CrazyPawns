@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using Code.Gameplay.Feature.Connect.Factory;
+﻿using System;
+using System.Collections.Generic;
 using Code.Gameplay.Feature.Connector.Behaviour;
-using Code.Gameplay.Feature.Connector.Service;
 using Code.Gameplay.Feature.RaycastDetector.Service;
 using Code.Gameplay.Input.Services;
 
@@ -9,27 +8,22 @@ namespace Code.Gameplay.Feature.Connect.Service
 {
     public class ChoiceConnectionService
     {
+        public event Action<ConnectorView> OnFirstConnectorSelected;
+        public event Action<ConnectorView> OnSecondConnectorSelected;
+        public event Action OnSelectDisabled;
+        
         private readonly InputService inputService;
         private readonly RaycastDetectorService raycastDetector;
-        private readonly ConnectFactory connectFactory;
-        private readonly ConnectorService connectorService;
-        private readonly ConnectBuildService connectBuildService;
 
         private ConnectorView firstConnector;
         private List<ConnectorView> avaliableConnectors;
         
         public ChoiceConnectionService(
             InputService inputService, 
-            RaycastDetectorService raycastDetector,
-            ConnectFactory connectFactory,
-            ConnectorService connectorService,
-            ConnectBuildService connectBuildService)
+            RaycastDetectorService raycastDetector)
         {
             this.inputService = inputService;
             this.raycastDetector = raycastDetector;
-            this.connectFactory = connectFactory;
-            this.connectorService = connectorService;
-            this.connectBuildService = connectBuildService;
         }
         
         public void Tick()
@@ -41,41 +35,20 @@ namespace Code.Gameplay.Feature.Connect.Service
                     if (!firstConnector)
                     {
                         firstConnector = connector;
-                        avaliableConnectors = connectorService.GetAvailableConnectors(firstConnector);
-
-                        foreach (var avaliableConnector in avaliableConnectors)
-                        {
-                            avaliableConnector.SelectVisual();
-                        }
+                        OnFirstConnectorSelected?.Invoke(firstConnector);
                     }
                     else if (
-                        firstConnector != connector && 
-                        avaliableConnectors != null && 
-                        avaliableConnectors.Contains(connector))
+                        firstConnector != connector)
                     {
-                        connectFactory.Create(firstConnector, connector);
-                        
-                        foreach (var avaliableConnector in avaliableConnectors)
-                        {
-                            avaliableConnector.BaseVisual();
-                        }
-                        
-                        avaliableConnectors = null;
+                        OnSecondConnectorSelected?.Invoke(connector);
+                        OnSelectDisabled?.Invoke();
                         firstConnector = null;
                     }
                 }
                 else
                 {
-                    if (avaliableConnectors != null)
-                    {
-                        foreach (var avaliableConnector in avaliableConnectors)
-                        {
-                            avaliableConnector.BaseVisual();
-                        }
-                    }
-                        
+                    OnSelectDisabled?.Invoke();
                     firstConnector = null;
-                    avaliableConnectors = null;
                 }
             }
         }

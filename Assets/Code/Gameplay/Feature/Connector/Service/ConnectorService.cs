@@ -30,13 +30,13 @@ namespace Code.Gameplay.Feature.Connector.Service
             }
         }
         
-        public List<ConnectorView> GetAvailableConnectors(ConnectorView view)
+        public List<ConnectorView> GetAvailableConnectors(ConnectorView connecting)
         {
             var result = new List<ConnectorView>();
 
             foreach (var connector in connectors)
             {
-                if (connector.Value.Any(x => x == view))
+                if (connector.Value.Any(x => x == connecting))
                 {
                     continue;
                 }
@@ -45,6 +45,28 @@ namespace Code.Gameplay.Feature.Connector.Service
             }
             
             return result;
+        }
+
+        public void EnableConnectionMode(List<ConnectorView> connectors)
+        {
+            if (connectors == null)
+                return;
+            
+            foreach (var connector in connectors)
+            {
+                connector.ActivateVisual();
+            }
+        }
+        
+        public void DisableConnectionMode(List<ConnectorView> connectors)
+        {
+            if (connectors == null)
+                return;
+            
+            foreach (var connector in connectors)
+            {
+                connector.BaseVisual();
+            }
         }
 
         private void OnRemoveParent(Chess parent)
