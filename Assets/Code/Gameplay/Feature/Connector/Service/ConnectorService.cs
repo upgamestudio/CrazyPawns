@@ -72,7 +72,15 @@ namespace Code.Gameplay.Feature.Connector.Service
 
         private void OnRemoveParent(Chess parent)
         {
-            connectors.Remove(parent);
+            if (this.connectors.TryGetValue(parent, out var connectors))
+            {
+                foreach (var connector in connectors)
+                {
+                    connector.Remove();
+                }
+            }
+            
+            this.connectors.Remove(parent);
             parent.OnRemoved -= OnRemoveParent;
         }
     }

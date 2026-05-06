@@ -5,7 +5,8 @@ namespace Code.Gameplay.Feature.Connector.Behaviour
 {
     public class ConnectorView : MonoBehaviour
     {
-        public event Action<Vector3> OnPositionUpdated; 
+        public event Action<ConnectorView> OnRemoved;
+        public event Action<ConnectorView> OnPositionUpdated; 
         
         [SerializeField] private Renderer renderer;
         
@@ -32,7 +33,12 @@ namespace Code.Gameplay.Feature.Connector.Behaviour
 
         public void UpdateConnectPosition()
         {
-            OnPositionUpdated?.Invoke(Position);
+            OnPositionUpdated?.Invoke(this);
+        }
+
+        public void Remove()
+        {
+            OnRemoved?.Invoke(this);
         }
     }
 }
