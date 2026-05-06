@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Code.Gameplay.Feature.Connector.Behaviour
 {
@@ -13,12 +15,15 @@ namespace Code.Gameplay.Feature.Connector.Behaviour
         private Material baseMaterial;
         private Material activeMaterial;
 
+        public List<ConnectorView> AttachedConnectors { get; private set; }
         public Vector3 Position => transform.position;
 
         public void Setup(Material baseMaterial, Material activeMaterial)
         {
             this.activeMaterial = activeMaterial;
             this.baseMaterial = baseMaterial;
+
+            AttachedConnectors = new List<ConnectorView>();
         }
 
         public void ActivateVisual()
@@ -36,9 +41,24 @@ namespace Code.Gameplay.Feature.Connector.Behaviour
             OnPositionUpdated?.Invoke(this);
         }
 
+        public void AddConnector(ConnectorView attached)
+        {
+            AttachedConnectors.Add(attached);
+        }
+
+        private void RemoveConnector(ConnectorView disconnected)
+        {
+            AttachedConnectors.Remove(disconnected);
+        }
+
         public void Remove()
         {
             OnRemoved?.Invoke(this);
+
+            foreach (var connector in AttachedConnectors)
+            {
+                connector.RemoveConnector(this);
+            }
         }
     }
 }

@@ -19,6 +19,9 @@ namespace Code.Gameplay.Feature.Connect.Factory
             var line = GameObject.Instantiate(staticDataProvider.GetConnectLineTemplate());
             line.Setup(firstConnector, secondConnector);
 
+            firstConnector.AddConnector(secondConnector);
+            secondConnector.AddConnector(firstConnector);
+
             return line;
         }
     }

@@ -34,14 +34,20 @@ namespace Code.Gameplay.Feature.Connector.Service
         {
             var result = new List<ConnectorView>();
 
-            foreach (var connector in connectors)
+            foreach (var connectors in connectors)
             {
-                if (connector.Value.Any(x => x == connecting))
+                if (connectors.Value.Any(x => x == connecting))
                 {
                     continue;
                 }
-                
-                result.AddRange(connector.Value);
+
+                foreach (var connector in connectors.Value)
+                {
+                    if(connecting.AttachedConnectors.Contains(connector))
+                        continue;
+                    
+                    result.Add(connector);
+                }
             }
             
             return result;
