@@ -24,23 +24,31 @@ namespace CrazyPawn.Infrastructure.Initializer
         private OnBoardDraggingService onBoardDraggingService;
         private ChoiceConnectionService choiceConnectionService;
         private ConnectBuildService connectBuildService;
+        private StaticDataProvider staticDataProvider;
+        private CameraProvider cameraProvider;
+        private BoardService boardService;
+        private ChessPieceService chessPieceService;
 
         private void Awake()
         {
-            var staticDataProvider = new StaticDataProvider();
-            var cameraProvider = new CameraProvider();
             var inputService = new InputService();
-            
-            var boardService = new BoardService(new BoardFactory(staticDataProvider));
             var connectorService = new ConnectorService();
-            var chessPieceService = new ChessPieceService(boardService, new ChessFactory(staticDataProvider), connectorService);
+
+            staticDataProvider = new StaticDataProvider();
+            cameraProvider = new CameraProvider();
+
+            boardService = new BoardService(new BoardFactory(staticDataProvider));
+            chessPieceService = new ChessPieceService(boardService, new ChessFactory(staticDataProvider), connectorService);
             
             raycastDetectorService = new RaycastDetectorService(cameraProvider, inputService);
             onBoardDraggingService = new OnBoardDraggingService(raycastDetectorService, cameraProvider, inputService, boardService);
             choiceConnectionService = new ChoiceConnectionService(inputService, raycastDetectorService);
 
             connectBuildService = new ConnectBuildService(choiceConnectionService, connectorService, new ConnectFactory(staticDataProvider));
+        }
 
+        private void Start()
+        {
             staticDataProvider.Initialize();
             cameraProvider.SetMainCamera(mainCamera);
             boardService.Create(settings.CheckerboardSize, settings.WhiteCellColor, settings.BlackCellColor);
